@@ -1,0 +1,16 @@
+const express = require('express');
+const PORT = 8000;
+
+//instanciamos la aplicacion
+const app = express();
+const {initializeDB} = require('./config/db-config');
+const { libraryRouter } = require('./routes');
+
+//utilizamos los Middleware
+app.use(express.json());
+app.use('/library',libraryRouter);
+
+app.listen(PORT, async()=>{
+  await initializeDB();
+  console.log(`Server runing in PORT:${PORT}`);
+});

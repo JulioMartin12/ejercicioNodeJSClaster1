@@ -10,7 +10,6 @@ const {libraryRouter, bookRouter } = require('./routes');
 app.use(express.json());
 app.use('/library',libraryRouter);
 app.use('/book',bookRouter);
-app.use('/:idBook',bookRouter);
 
 app.listen(PORT, async()=>{
   await initializeDB();

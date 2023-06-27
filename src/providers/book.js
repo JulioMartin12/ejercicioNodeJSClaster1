@@ -12,10 +12,14 @@ const createBook = async(book)=>{
     }
   
 };
-const updateBook = async(idBook)=>{
+const updateBook = async(bookId,body)=>{
     try {
-        const bookUpdated = await Book.update(idBook);
-        return bookUpdated;
+        console.log(body)
+        console.log(bookId)
+       const bookChange =  await Book.update({body},
+        {were:{id:bookId} } 
+        );
+        return bookChange;
     } catch (err) {
         console.error('Error when updeting Book',err);
         throw err;
@@ -27,9 +31,49 @@ const updateBook = async(idBook)=>{
 
 
 
-const deleteBook = async()=>{};
-const findBookByPK = async()=>{};
-const getAllBook = async()=>{};
+const deleteBook = async(bookId)=>{
+    try {
+         const bookDelet= await Book.findByPk(bookId);
+         console.log(bookDelet);
+        await Book.destroy({
+            where: { id :bookId}
+        });
+        return bookDelet;
+    } catch (err) {
+        throw err;
+    }
+  
+};
 
 
-module.exports = {createBook, updateBook};
+const findBookByPK = async(bookId)=>{
+ try {
+    const book = await Book.findByPk(bookId);
+    return book;
+ } catch (err) {
+    console.error('Error en la busqueda')
+    throw err;
+ }
+};
+const getAllBook = async()=>{
+    try {
+        const books = await Book.findAll({
+            attributes: [
+                "id",
+                "isbn",
+                "title",
+                "author",
+                "year",
+                "library"
+            ]
+        });
+        console.log(books)
+        return books;
+    } catch (err) {
+        console.error('Error en la busqueda de todos los libors.')
+        throw err;
+    }
+};
+
+
+module.exports = {createBook, updateBook, findBookByPK, getAllBook,deleteBook};

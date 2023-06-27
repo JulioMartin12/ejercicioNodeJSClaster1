@@ -21,7 +21,7 @@ const createBook = async(req,res)=>{
 const updateBook = async(req,res)=>{
 
     try {
-        const newBook = await bookService.updateBook(req.body);
+        const newBook = await bookService.updateBook(req.params.bookId,req.body);
         res.json(newBook);
     } catch (err) {
         res.status(400).json({
@@ -34,13 +34,34 @@ const updateBook = async(req,res)=>{
 
 
 //(AUTH)
-const deleteBook = async(req,res)=>{};
+const deleteBook = async(req,res)=>{
+    try {
+        const bookDelete = await bookService.deleteBook(req.params.bookId);
+        res.json(bookDelete);
+    } catch (err) {
+        res.status(400);
+    }
+};
 
 
-const findBookByPK = async(req,res)=>{};
+const findBookByPK = async(req,res)=>{
+    try {
+        const book = await bookService.findBookByPK(req.params.bookId)
+        res.json(book)
+    } catch (err) {
+        res.status(500)
+    }
+};
 
 
-const getAllBook = async(req,res)=>{};
+const getAllBook = async(req,res)=>{
+    try {
+        const books = await bookService.getAllBook();
+      res.json(books)
+    } catch (err) {
+       res.status(400)
+    }
+};
 
 
-module.exports = {createBook, updateBook};
+module.exports = {createBook, updateBook, findBookByPK, getAllBook, deleteBook};

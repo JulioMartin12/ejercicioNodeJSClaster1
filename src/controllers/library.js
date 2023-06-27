@@ -18,7 +18,16 @@ const createLibrary = async(req, res) => {
  
  
  const getLibrariesAndAllBooks = async() => {
-    
+    try {
+        const newLibrary = await libraryService.getLibrariesAndAllBooks();
+        res.json(newLibrary);
+    } catch (err) {
+        res.status(500).json({
+            action:'Obtener todas las librerias.',
+            error: err.message,
+        })
+        
+    } 
  };
  
  const getAllBooksByCriteria = () => {};

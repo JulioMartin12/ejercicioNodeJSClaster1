@@ -30,7 +30,19 @@ const createLibrary = async(req, res) => {
     } 
  };
  
- const getAllBooksByCriteria = () => {};
+ const getAllBooksByCriteriaLibrary = async(req,res) => {
+    try {
+        const libraryAllBooks = await libraryService.getAllBooksByCriteriaLibrary(req.params.libraryId);
+        res.json(libraryAllBooks);
+    } catch (er) {
+        res.status(400).json({
+            action:'Obtener libraria y sus libros.',
+            error: err.message,
+        })
+        
+    }
+
+ };
  
  //(AUTH)
  const updateLibrery = () => {};
@@ -55,4 +67,4 @@ const createLibrary = async(req, res) => {
  */
  
  
- module.exports = { createLibrary, getLibrariesAndAllBooks};
+ module.exports = { createLibrary, getLibrariesAndAllBooks, getAllBooksByCriteriaLibrary, updateLibrery, deletLibrery};

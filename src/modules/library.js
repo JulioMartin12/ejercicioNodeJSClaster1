@@ -19,6 +19,7 @@ const Library = sequelize.define('Libraries', {
    type: DataTypes.STRING,
    allowNull:false,
   },
-});
+},
+{paranoid: true});
 
 module.exports = Library;

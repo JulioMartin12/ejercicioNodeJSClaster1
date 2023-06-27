@@ -17,7 +17,7 @@ const updateBook = async(bookId,body)=>{
         console.log(body)
         console.log(bookId)
        const bookChange =  await Book.update({body},
-        {were:{id:bookId} } 
+        {were:{ id:bookId } } 
         );
         return bookChange;
     } catch (err) {

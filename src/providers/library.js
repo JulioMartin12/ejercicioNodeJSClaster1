@@ -1,4 +1,4 @@
-const {Library} = require('../modules');
+const {Library, Book} = require('../modules');
 const {Op} = require('sequelize');
 
 //(AUTH)
@@ -25,13 +25,29 @@ const getLibrariesAndAllBooks = async() => {
     }
 };
 
-const getAllBooksByCriteria = () => {};
+const getAllBooksByCriteriaLibrary = async(libraryId) => {
+    try {
+        const libraryAllBooks = await Library.findByPk(libraryId);
+        return libraryAllBooks;
+    } catch (err) {
+        console.error('Error when found librery', err);
+        throw err;
+    }
+};
 
 //(AUTH)
 const updateLibrery = () => {};
 
 //(AUTH)
-const deletLibrery = () => {};
+const deletLibrery = async(libraryId) => {
+    try {
+        const libreryDelete = await Library.destroy(libraryId);
+        return libreryDelete;
+    } catch (err) {
+        console.log('Error when delete library');
+        throw err;
+    }
+};
 
 //(AUTH)
 const addNewBook = () => {};
@@ -50,4 +66,4 @@ Debe traer también todos los libros
 */
 
 
-module.exports = { createLibrary, getLibrariesAndAllBooks};
+module.exports = { createLibrary, getLibrariesAndAllBooks, getAllBooksByCriteriaLibrary, updateLibrery, deletLibrery};

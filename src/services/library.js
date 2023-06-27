@@ -1,4 +1,4 @@
-const {libraryProvider} = require('../providers');
+const {libraryProvider, bookProvider} = require('../providers');
 
 //(AUTH)
 const createLibrary = async(library) => {
@@ -24,7 +24,14 @@ const getLibrariesAndAllBooks = async() => {
     
 };
 
-const getAllBooksByCriteria = () => {};
+const getAllBooksByCriteriaLibrary = async(libraryId) => {
+  try {
+     const libraryAllBooks = await libraryProvider.getAllBooksByCriteriaLibrary(libraryId);
+     return libraryAllBooks;
+  } catch (err) {
+    
+  }
+};
 
 //(AUTH)
 const updateLibrery = () => {};
@@ -37,4 +44,4 @@ const addNewBook = () => {};
 
 
 
-module.exports = { createLibrary, getLibrariesAndAllBooks};
+module.exports = { createLibrary, getLibrariesAndAllBooks, getAllBooksByCriteriaLibrary, updateLibrery, deletLibrery};

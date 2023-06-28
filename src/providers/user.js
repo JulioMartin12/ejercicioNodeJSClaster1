@@ -1,4 +1,6 @@
+const { userController } = require('../controllers');
 const {User} = require('../modules');
+const {Op} = require('sequelize');
 
 
 const createUser = async(user)=>{
@@ -60,6 +62,25 @@ const findUserByPK = async(userId)=>{
  }
 };
 
+const validateUser = async(options)=>{
+    try {
+       const userFound = await User.findAll(
+        {where: {
+               [Op.and]: [{email: options.user},{ password: options.pass}],
+        },
+
+        });
+        if(userFound.length!= 0){
+
+            return userFound
+        }
+       return false;
+    } catch (err) {
+       console.error('Error when validating User', err)
+      return false;
+    }
+   };
+
 const getAllUser = async()=>{
     try {
        const users = await User.findAll();
@@ -72,4 +93,4 @@ const getAllUser = async()=>{
 
 
 
-module.exports = {createUser, updateUser, findUserByPK, deleteUser, getAllUser};
+module.exports = {createUser, updateUser, findUserByPK, deleteUser, getAllUser, validateUser};

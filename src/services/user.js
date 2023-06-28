@@ -61,6 +61,16 @@ const getAllUser = async()=>{
     }
    };
 
+   const validerUser = async(user, pass)=>{
+    try {
+       const userFound = await userProvider.validateUser({user, pass});
+       return userFound;
+    } catch (err) {
+       console.error('Error en la busqueda')
+       throw err;
+    }
+   };
 
 
-module.exports = {createUser, updateUser, findUserByPK,deleteUser, getAllUser};
+
+module.exports = {createUser, updateUser, findUserByPK,deleteUser, getAllUser, validerUser};

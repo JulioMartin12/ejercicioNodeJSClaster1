@@ -4,12 +4,13 @@ const PORT = 8000;
 //instanciamos la aplicacion
 const app = express();
 const {initializeDB} = require('./config/db-config');
-const {libraryRouter, bookRouter } = require('./routes');
+const {libraryRouter, bookRouter , userRouter} = require('./routes');
 
 //utilizamos los Middleware
 app.use(express.json());
 app.use('/library',libraryRouter);
 app.use('/book',bookRouter);
+app.use('/user',userRouter);
 
 app.listen(PORT, async()=>{
   await initializeDB();

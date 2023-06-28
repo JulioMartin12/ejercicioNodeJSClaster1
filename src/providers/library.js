@@ -16,7 +16,7 @@ const createLibrary = async(library) => {
 
 const getLibrariesAndAllBooks = async() => {
     try {
-        const libraries = Library.findAll();
+        const libraries = Library.findAll({include: {all:true}});
         return libraries;
     } catch (err) {
         console.error('Error when found libreries', err);
@@ -27,7 +27,7 @@ const getLibrariesAndAllBooks = async() => {
 
 const getAllBooksByCriteriaLibrary = async(libraryId) => {
     try {
-        const libraryAllBooks = await Library.findByPk(libraryId);
+        const libraryAllBooks = await Library.findByPk(libraryId,{ include: {all:true}});
         return libraryAllBooks;
     } catch (err) {
         console.error('Error when found librery', err);
@@ -36,21 +36,52 @@ const getAllBooksByCriteriaLibrary = async(libraryId) => {
 };
 
 //(AUTH)
-const updateLibrery = () => {};
+const updateLibrary = async(libraryId,body) => {
 
-//(AUTH)
-const deletLibrery = async(libraryId) => {
     try {
-        const libreryDelete = await Library.destroy(libraryId);
-        return libreryDelete;
+        console.log(body)
+        console.log(libraryId)
+        const libraryUpdate = await Library.findByPk(libraryId);
+        if(libraryUpdate){
+           libraryUpdate.update(body);
+
+        }
+                 console.log("Library cambiado" + libraryUpdate);
+        return body;
     } catch (err) {
-        console.log('Error when delete library');
+        console.error('Error when updeting Library',err);
         throw err;
+        
     }
 };
 
 //(AUTH)
-const addNewBook = () => {};
+const deletLibrery = async(libraryId) => {
+    try {
+        const libreryDelete = await Library.findByPk(libraryId);
+        console.log(libreryDelete);
+       await Library.destroy({
+           where: { id :libraryId }
+       });
+       return libreryDelete;
+   } catch (err) {
+    console.error('Error when deleting Library',err);
+       throw err;
+   }
+  
+};
+
+//(AUTH)
+const addNewBook = async(libraryId, book) => {
+    try {
+       const addBook = await Book.create({...book, LibraryId:libraryId})   
+       return addBook  
+    } catch (err) {
+        console.error('Error when adding Book',err);
+        throw err;
+        
+    }
+};
 
 /* 
 
@@ -66,4 +97,4 @@ Debe traer también todos los libros
 */
 
 
-module.exports = { createLibrary, getLibrariesAndAllBooks, getAllBooksByCriteriaLibrary, updateLibrery, deletLibrery};
+module.exports = { createLibrary, getLibrariesAndAllBooks, getAllBooksByCriteriaLibrary, updateLibrary, deletLibrery, addNewBook};

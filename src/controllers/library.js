@@ -17,7 +17,7 @@ const createLibrary = async(req, res) => {
  };
  
  
- const getLibrariesAndAllBooks = async() => {
+ const getLibrariesAndAllBooks = async(req,res) => {
     try {
         const newLibrary = await libraryService.getLibrariesAndAllBooks();
         res.json(newLibrary);
@@ -45,13 +45,44 @@ const createLibrary = async(req, res) => {
  };
  
  //(AUTH)
- const updateLibrery = () => {};
+ const updateLibrary = async(req,res) => {
+    try { const libraryUpdate = await libraryService.updateLibrary(req.params.libraryId,req.body);
+        res.json(libraryUpdate);
+    } catch (er) {
+        res.status(400).json({
+            action:'Actualizar Biblioteca.',
+            error: err.message,
+        })
+    }
+ };
  
  //(AUTH)
- const deletLibrery = () => {};
+ const deletLibrery = async(req, res) => {
+    try {
+        const libraryDelete = await libraryService.deletLibrery(req.params.libraryId);
+        res.json(libraryDelete);
+    } catch (err) {
+        res.status(400).json({
+            action:'Borrar una libraria y sus libros.',
+            error: err.message,
+        })
+        
+    }
+ };
  
  //(AUTH)
- const addNewBook = () => {};
+ const addNewBook = async(req, res) => {
+    try {
+         const addBook = await libraryService.addNewBook(req.libraryId, req.body);
+         res.json(addBook); 
+    } catch (err) {
+        res.status(400).json({
+            action:'Agregar un libro a la libreria.',
+            error: err.message,
+        })
+        
+    }
+ };
  
  /* 
  
@@ -67,4 +98,4 @@ const createLibrary = async(req, res) => {
  */
  
  
- module.exports = { createLibrary, getLibrariesAndAllBooks, getAllBooksByCriteriaLibrary, updateLibrery, deletLibrery};
+ module.exports = { createLibrary, getLibrariesAndAllBooks, getAllBooksByCriteriaLibrary, updateLibrary, deletLibrery,addNewBook};

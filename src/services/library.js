@@ -15,7 +15,7 @@ const createLibrary = async(library) => {
 
 const getLibrariesAndAllBooks = async() => {
   try {
-    return await libraryProvider.getLibrariesAndAllBooks(library);
+    return await libraryProvider.getLibrariesAndAllBooks();
   } catch (err) {
     throw err;
     
@@ -34,14 +34,39 @@ const getAllBooksByCriteriaLibrary = async(libraryId) => {
 };
 
 //(AUTH)
-const updateLibrery = () => {};
+const updateLibrary = async(libraryId,body) => {
+  try {
+    const libraryUpdate = await libraryProvider.updateLibrary(libraryId,body);
+    return libraryUpdate;
+ } catch (err) {
+   
+ }
+};
 
 //(AUTH)
-const deletLibrery = () => {};
+const deletLibrery = async(libraryId) => {
+  try {
+    
+     const libraryDelete = await libraryProvider.deletLibrery(libraryId);
+     return libraryDelete ;
+  } catch (err) {
+    console.error('Error al eliminar la libreria');
+    throw err;
+  }
+};
 
 //(AUTH)
-const addNewBook = () => {};
+const addNewBook = async(libraryId,book) => {
+  try {
+         const addBook = await libraryProvider.addNewBook(libraryId,book);
+         return addBook;
+  } catch (err) {
+    console.error('Error al agregar el libro a la libreria');
+    throw err;
+  }
+
+};
 
 
 
-module.exports = { createLibrary, getLibrariesAndAllBooks, getAllBooksByCriteriaLibrary, updateLibrery, deletLibrery};
+module.exports = { createLibrary, getLibrariesAndAllBooks, getAllBooksByCriteriaLibrary, updateLibrary, deletLibrery, addNewBook};

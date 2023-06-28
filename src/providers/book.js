@@ -16,10 +16,13 @@ const updateBook = async(bookId,body)=>{
     try {
         console.log(body)
         console.log(bookId)
-       const bookChange =  await Book.update({body},
-        {were:{ id:bookId } } 
-        );
-        return bookChange;
+        const bookUpdate = await Book.findByPk(bookId);
+        if(bookUpdate){
+            bookUpdate.update(body);
+
+        }
+                 console.log("book cambiado" + bookUpdate);
+        return body;
     } catch (err) {
         console.error('Error when updeting Book',err);
         throw err;
@@ -55,6 +58,7 @@ const findBookByPK = async(bookId)=>{
     throw err;
  }
 };
+
 const getAllBook = async()=>{
     try {
         const books = await Book.findAll({

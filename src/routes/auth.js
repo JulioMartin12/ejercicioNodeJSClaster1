@@ -7,7 +7,7 @@ const {userService} = require('../services')
 router.post('/',async(req,res) => {
   const { user, pass} = req.body;
   if(user ==='admin' &&  pass === 'admin'){
-   const token = jwt.sign({user, role: 'Admin'},authMdw.SERVER_SECRET);
+   const token = jwt.sign({user, role: 'admin'},authMdw.SERVER_SECRET);
    res.json({token})
   }else{
     const userFound= await userService.validerUser(user, pass);

@@ -10,15 +10,27 @@ const User = sequelize.define('Users',{
   user:{
     type:DataTypes.STRING,
     allowNull:false,
+    /* unique:{true , 'admin'}, */
+  
   },
   role:{
     type:DataTypes.STRING,
     allowNull:false,
+    unique:'admin',
   },
  email:{
     type:DataTypes.STRING,
     allowNull:false,
-    unique:true,
+    unique:{    
+      args: true,    
+      msg: 'Correo ya está registrado en la base de datos',
+     },
+    validate: {
+       isEmail: {
+        args: true,
+        msg: "Por favor, proporciona una dirección de correo electrónico válida",
+      },
+      },
   },
   password:{
     type: DataTypes.STRING,

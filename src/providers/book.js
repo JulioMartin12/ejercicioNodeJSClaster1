@@ -38,9 +38,9 @@ const deleteBook = async(bookId)=>{
     try {
          const bookDelet= await Book.findByPk(bookId);
          console.log(bookDelet);
-        await Book.destroy({
+        await Book.destroy( {
             where: { id :bookId}
-        });
+        } );
         return bookDelet;
     } catch (err) {
         throw err;

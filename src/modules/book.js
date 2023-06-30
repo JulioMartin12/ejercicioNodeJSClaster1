@@ -10,7 +10,6 @@ const Book = sequelize.define('Books', {
    isbn:{
     type:DataTypes.INTEGER,
     allowNull:false,
-    unique:true,
    },
 
    title:{
@@ -26,11 +25,18 @@ const Book = sequelize.define('Books', {
    year:{
     type:DataTypes.STRING,
     allowNull:false,
-   },
+    validate: {
+      isNumeric:{
+      args: true,
+      msg: "Por favor,en el campo year, Ingrese un valor Numerico",
+    }  
+    }   
+    }
+   ,
 
    library:{
     type:DataTypes.INTEGER,
-    allowNull:false,
+    allowNull:true,
     foreignKey:true,
    },
 

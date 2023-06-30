@@ -73,7 +73,7 @@ const createLibrary = async(req, res) => {
  //(AUTH)
  const addNewBook = async(req, res) => {
     try {
-         const addBook = await libraryService.addNewBook(req.libraryId, req.body);
+         const addBook = await libraryService.addNewBook(req.params.libraryId, req.body);
          res.json(addBook); 
     } catch (err) {
         res.status(400).json({

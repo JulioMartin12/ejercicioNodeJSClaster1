@@ -60,10 +60,15 @@ const deletLibrery = async(libraryId) => {
     try {
         const libreryDelete = await Library.findByPk(libraryId);
         console.log(libreryDelete);
-       await Library.destroy({
-           where: { id :libraryId }
-       });
-       return libreryDelete;
+        if(libreryDelete){
+            await Library.destroy({
+                where: { id :libraryId }
+            });
+            Book.update( { library: null}, {where: { library :libraryId }}
+                         )
+            return libreryDelete;
+        }
+       return false;
    } catch (err) {
     console.error('Error when deleting Library',err);
        throw err;
@@ -73,8 +78,9 @@ const deletLibrery = async(libraryId) => {
 
 //(AUTH)
 const addNewBook = async(libraryId, book) => {
-    try {
-       const addBook = await Book.create({...book, LibraryId:libraryId})   
+    try {console.log(libraryId)
+        console.log({...book, "library":libraryId});
+       const addBook = await Book.create({...book, "library":libraryId})   
        return addBook  
     } catch (err) {
         console.error('Error when adding Book',err);

@@ -19,12 +19,19 @@ const Library = sequelize.define('Libraries', {
   telefono: {
    type: DataTypes.STRING,
    allowNull:false,
+   validate: {
+    isNumeric:{
+    args: true,
+    msg: "Por favor,en el campo telefono, Ingrese un valor Numerico",
+  }  
+  }   
   },
 },
 {paranoid: true});
 
 Library.hasMany(Book,{foreignKey:'library'}, { 
   onDelete: 'cascade',
+  onUpdate: 'cascade',
   hooks: true, 
 });
 Book.belongsTo(Library);

@@ -53,7 +53,7 @@ const findBookByPK = async(bookId)=>{
  try {
     const book = await Book.findByPk(bookId);
     return book;
- } catch (err) {
+ } catch(err) {
     console.error('Error en la busqueda')
     throw err;
  }
@@ -73,7 +73,7 @@ const getAllBook = async()=>{
         });
         console.log(books)
         return books;
-    } catch (err) {
+    } catch(err) {
         console.error('Error en la busqueda de todos los libors.')
         throw err;
     }

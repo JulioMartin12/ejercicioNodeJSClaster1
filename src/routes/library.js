@@ -7,7 +7,7 @@ const {authMdw} = require('../middleware');
 router.post('/',authMdw.userIsAdminMDW,libraryController.createLibrary);
 router.get('/',authMdw.jwtValidMDW, libraryController.getLibrariesAndAllBooks);
 router.get('/:libraryId', authMdw.jwtValidMDW, libraryController.getAllBooksByCriteriaLibrary);
-router.post('/:libraryId', authMdw.userIsAdminMDW, libraryController.deletLibrery)
+router.delete('/:libraryId', authMdw.userIsAdminMDW, libraryController.deletLibrery)
 router.post('/:libraryId/book', authMdw.userIsAdminMDW, libraryController.addNewBook)
 router.put('/:libraryId', authMdw.userIsAdminMDW, libraryController.updateLibrary)
 

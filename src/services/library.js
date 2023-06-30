@@ -1,4 +1,4 @@
-const {libraryProvider, bookProvider} = require('../providers');
+const {libraryProvider} = require('../providers');
 
 //(AUTH)
 const createLibrary = async(library) => {

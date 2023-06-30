@@ -3,7 +3,7 @@ const PORT = 8000;
 
 //instanciamos la aplicacion
 const app = express();
-const {initializeDB} = require('./config/db-config');
+const {configutionBD, initConfiguration} = require('./config');
 const {libraryRouter, bookRouter , userRouter, authRouter} = require('./routes');
 
 //utilizamos los Middleware
@@ -14,6 +14,7 @@ app.use('/user',userRouter);
 app.use('/login',authRouter);
 
 app.listen(PORT, async()=>{
-  await initializeDB();
+  await configutionBD.initializeDB();
+  initConfiguration.createData();
   console.log(`Server runing in PORT:${PORT}`);
 });

@@ -6,7 +6,7 @@ const {authMdw} = require('../middleware');
 router.post('/',authMdw.userIsAdminMDW ,bookController.createBook);
 router.get('/:bookId',authMdw.jwtValidMDW ,bookController.findBookByPK);
 router.get('/',authMdw.jwtValidMDW ,bookController.getAllBook);
-router.post('/:bookId',authMdw.userIsAdminMDW  , bookController.deleteBook);
+router.delete('/:bookId',authMdw.userIsAdminMDW  , bookController.deleteBook);
 router.put('/:bookId',authMdw.userIsAdminMDW  ,bookController.updateBook);
 
 module.exports = router;

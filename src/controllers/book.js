@@ -49,7 +49,7 @@ const findBookByPK = async(req,res)=>{
         const book = await bookService.findBookByPK(req.params.bookId)
         res.json(book)
     } catch (err) {
-        res.status(500)
+        res.status(400)
     }
 };
 

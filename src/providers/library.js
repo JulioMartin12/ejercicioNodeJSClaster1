@@ -16,7 +16,16 @@ const createLibrary = async(library) => {
 
 const getLibrariesAndAllBooks = async() => {
     try {
-        const libraries = Library.findAll({include: {all:true}});
+        const libraries = Library.findAll({include: {all:true,
+                attributes: [
+                    "id",
+                    "isbn",
+                    "title",
+                    "author",
+                    "year",
+                    "library"
+                ]
+            }});
         return libraries;
     } catch (err) {
         console.error('Error when found libreries', err);

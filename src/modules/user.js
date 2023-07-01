@@ -10,8 +10,7 @@ const User = sequelize.define('Users',{
   user:{
     type:DataTypes.STRING,
     allowNull:false,
-    /* unique:{true , 'admin'}, */
-  
+    
   },
   role:{
     type:DataTypes.STRING,

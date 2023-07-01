@@ -1,5 +1,4 @@
 const {Book} = require('../modules');
-const {Op} = require('sequelize');
 
 const createBook = async(book)=>{
 

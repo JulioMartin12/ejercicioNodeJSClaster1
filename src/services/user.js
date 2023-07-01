@@ -31,7 +31,6 @@ const updateUser = async(userId,body)=>{
 const deleteUser = async(userId)=>{
     try {
          const userDelet= await userProvider.deleteUser(userId);
-         console.log(userDelet);
          return userDelet;
     } catch (err) {
         console.error('Error when deleting user',err);

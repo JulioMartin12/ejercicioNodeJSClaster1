@@ -35,8 +35,7 @@ const updateUser = async(userId,body)=>{
 const deleteUser = async(userId)=>{
     try {
          const userDelet= await User.findByPk(userId);
-         console.log(userDelet);
-        await User.destroy({
+          await User.destroy({
             where: { id :userId}
         });
         return userDelet;

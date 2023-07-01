@@ -1,5 +1,5 @@
 const {Library, Book} = require('../modules');
-const {Op} = require('sequelize');
+
 
 //(AUTH)
 const createLibrary = async(library) => {
@@ -48,8 +48,7 @@ const getAllBooksByCriteriaLibrary = async(libraryId) => {
 const updateLibrary = async(libraryId,body) => {
 
     try {
-        console.log(body)
-        console.log(libraryId)
+      
         const libraryUpdate = await Library.findByPk(libraryId);
         if(libraryUpdate){
            libraryUpdate.update(body);
@@ -68,7 +67,7 @@ const updateLibrary = async(libraryId,body) => {
 const deletLibrery = async(libraryId) => {
     try {
         const libreryDelete = await Library.findByPk(libraryId);
-        console.log(libreryDelete);
+    
         if(libreryDelete){
             await Library.destroy({
                 where: { id :libraryId }
@@ -87,8 +86,7 @@ const deletLibrery = async(libraryId) => {
 
 //(AUTH)
 const addNewBook = async(libraryId, book) => {
-    try {console.log(libraryId)
-        console.log({...book, "library":libraryId});
+    try {
        const addBook = await Book.create({...book, "library":libraryId})   
        return addBook  
     } catch (err) {
@@ -98,18 +96,6 @@ const addNewBook = async(libraryId, book) => {
     }
 };
 
-/* 
-
-○ Crear librería (AUTH)
-○ Obtener una librería
-Debe traer también todos los libros
-○ Obtener todas las librerías
-Debe traer también todos los libros
-○ Modificar una librería (AUTH)
-○ Eliminar una librería (**) (AUTH)
-○ Agregar un libro nuevo (*) (AUTH)
-
-*/
 
 
 module.exports = { createLibrary, getLibrariesAndAllBooks, getAllBooksByCriteriaLibrary, updateLibrary, deletLibrery, addNewBook};

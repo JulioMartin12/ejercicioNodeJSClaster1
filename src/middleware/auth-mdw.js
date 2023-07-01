@@ -1,10 +1,11 @@
 const SERVER_SECRET = 'secretoQueSoloConoceElServer';
-
 const passport = require('passport');
 const passportJwt = require('passport-jwt');
 const JWTStrategy = passportJwt.Strategy;
 const ExtractJWT = passportJwt.ExtractJwt;
 
+/* Metodo el cual realizamos la validación de un usuario logeado.
+ */
 passport.use(
     new JWTStrategy(
         {
@@ -21,6 +22,8 @@ passport.use(
 
 const jwtValidMDW = passport.authenticate('jwt', {session: false})
 
+/* Metodo el cual realizamos la validación del administrador logeado.
+ */
 const userIsAdminMDW = (req, res, next) => {
     return passport.authenticate(
         'jwt',

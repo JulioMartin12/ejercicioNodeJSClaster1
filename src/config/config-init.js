@@ -1,5 +1,7 @@
 const {User} = require('../modules')
 
+/* En este metodo creamos un usuario admin, el cual es el encargado del manejo de las acciones critica sobre la Base de dato. La primera vez que se crean todas las tablas se creara un Usuario administrador de la misma.
+*/
 const createData = async () =>{
     try{
        

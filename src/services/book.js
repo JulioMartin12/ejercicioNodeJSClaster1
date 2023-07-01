@@ -3,8 +3,7 @@ const {bookProvider} = require('../providers');
 //(AUTH)
 const createBook = async(book)=>{
     try {
-   console.log(book.year);
-          const newBook = await bookProvider.createBook(book);
+           const newBook = await bookProvider.createBook(book);
           return newBook;
           
     } catch (err) {
@@ -30,8 +29,6 @@ const updateBook = async(idBook,body)=>{
 //(AUTH)
 const deleteBook = async(bookId)=>{
 try {
-
-
     const bookDelete  = await bookProvider.deleteBook(bookId);
     return bookDelete;
 } catch (err) {

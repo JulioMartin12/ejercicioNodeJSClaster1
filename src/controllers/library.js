@@ -7,7 +7,7 @@ const createLibrary = async(req, res) => {
         const newLibrary = await libraryService.createLibrary(req.body);
         res.json(newLibrary);
     } catch (err) {
-        res.status(500).json({
+        res.status(400).json({
             action:'Create Library.',
             error: err.message,
         })
@@ -22,7 +22,7 @@ const createLibrary = async(req, res) => {
         const newLibrary = await libraryService.getLibrariesAndAllBooks();
         res.json(newLibrary);
     } catch (err) {
-        res.status(500).json({
+        res.status(400).json({
             action:'Obtener todas las librerias.',
             error: err.message,
         })
@@ -84,18 +84,6 @@ const createLibrary = async(req, res) => {
     }
  };
  
- /* 
- 
- ○ Crear librería (AUTH)
- ○ Obtener una librería
- Debe traer también todos los libros
- ○ Obtener todas las librerías
- Debe traer también todos los libros
- ○ Modificar una librería (AUTH)
- ○ Eliminar una librería (**) (AUTH)
- ○ Agregar un libro nuevo (*) (AUTH)
- 
- */
  
  
  module.exports = { createLibrary, getLibrariesAndAllBooks, getAllBooksByCriteriaLibrary, updateLibrary, deletLibrery,addNewBook};
